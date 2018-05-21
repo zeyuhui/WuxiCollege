@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>录入文章</title>
+    {{ ckeditor.load() }}
+</head>
+<body>
+	<div class="warpper" style="width: 700px; margin: auto">
+		<h1>录入文章</h1>
+		<form method="post">
+			{{ form.csrf_token }}
+			标题1&nbsp;&nbsp;{{ form.t1 }}<br><br>
+			标题2&nbsp;&nbsp;{{ form.t2 }}<br><br>
+			标题3&nbsp;&nbsp;{{ form.t3 }}<br><br>
+			{{ form.body }}
+			<br>
+			{{ form.submit }}
+		</form>
+	</div>
+	{{ ckeditor.config(name='body') }}
+</body>
+</html>

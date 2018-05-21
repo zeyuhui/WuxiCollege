@@ -10,7 +10,9 @@
     <meta name="author" content="">
     <!-- <link rel="icon" href="../../favicon.ico"> -->
 
-    <title>Carousel Template for Bootstrap</title>
+    <link rel="icon" href="{{url_for('static',filename='favicon.ico')}}">
+
+    <title>汽车工程与管理学院--无锡南洋职业技术学院</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -30,6 +32,8 @@
 
     <!-- Custom styles for this template -->
     <link href="{{url_for('static',filename='css/carousel.css')}}" rel="stylesheet">
+    {{ ckeditor.load_code_theme() }}
+
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -50,7 +54,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#" style="width: 100px;text-align: center;">首页</a>
+                    <a class="navbar-brand" href="/" style="width: 100px;text-align: center;">首页</a>
                   </div>
                   <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -60,47 +64,48 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">学院概况 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">简介</a></li>
-                          <li><a href="#">机构设置</a></li>
-                          <li><a href="#">获奖情况</a></li>
+                          <li><a href="/detail?t1=1&t2=1&t3=0">简介</a></li>
+                          <li><a href="/detail?t1=1&t2=2&t3=0">机构设置</a></li>
+                          <li><a href="/detail?t1=1&t2=3&t3=0">获奖情况</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">专业设置 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">汽车检测与维修技术专业</a></li>
-                          <li><a href="#">汽车制造与装配技术专业</a></li>
-                          <li><a href="#">汽车电子技术专业</a></li>
-                          <li><a href="#">汽车营销与服务专业</a></li>
+                          <li><a href="/detail?t1=2&t2=1&t3=0">汽车电子技术专业</a></li>
+                          <li><a href="/detail?t1=2&t2=2&t3=0">汽车检测与维修技术专业</a></li>
+                          <li><a href="/detail?t1=2&t2=3&t3=0">汽车营销与服务专业</a></li>
+                          <li><a href="/detail?t1=2&t2=4&t3=0">汽车运用与维修技术专业</a></li>
+                          <li><a href="/detail?t1=2&t2=5&t3=0">汽车制造与装配技术专业</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">招生就业 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">招生信息</a></li>
-                          <li><a href="#">就业信息</a></li>
-                          <li><a href="#">现代学徒制</a></li>
-                          <li><a href="#">校企合作</a></li>
+                          <li><a href="/detail?t1=3&t2=1&t3=0">招生信息</a></li>
+                          <li><a href="/detail?t1=3&t2=2&t3=0">就业信息</a></li>
+                          <li><a href="/detail?t1=3&t2=3&t3=0">现代学徒制</a></li>
+                          <li><a href="/detail?t1=3&t2=4&t3=0">校企合作</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">本科教学 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">院校介绍</a></li>
-                          <li><a href="#">专业设置</a></li>
+                          <li><a href="/detail?t1=4&t2=1&t3=0">院校介绍</a></li>
+                          <li><a href="/detail?t1=4&t2=2&t3=0">专业设置</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">学生服务 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">学生组织</a></li>
-                          <li><a href="#">规章制度</a></li>
+                          <li><a href="/detail?t1=5&t2=1&t3=0">学生组织</a></li>
+                          <li><a href="/detail?t1=5&t2=2&t3=0">规章制度</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">校友天地 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">优秀毕业生</a></li>
+                          <li><a href="/detail?t1=6&t2=1&t3=0">优秀毕业生</a></li>
                         </ul>
                       </li>
                     </ul>
@@ -118,26 +123,26 @@
       <div class="row">
         <div class="col-lg-3" style="padding-bottom: 0px;" id="sidebar">
           <div class="list-group">
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">学院动态</a>
+            <a href="#" class="list-group-item">  &nbsp;&nbsp;&nbsp;&nbsp;简介</a>
+            <a href="#" class="list-group-item">  &nbsp;&nbsp;&nbsp;&nbsp;机构设置</a>
+            <a href="#" class="list-group-item">  &nbsp;&nbsp;&nbsp;&nbsp;获奖情况</a>
           </div>
         </div>
 
         <div class="col-lg-9" style="padding-bottom: 0px;">
           <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#">学院动态</a></li>
+              <li role="presentation" class="active"><a href="#">学院动态  &nbsp;&nbsp;>>&nbsp;&nbsp;  简介</a></li>
           </ul>
-          <div class="row">
-            
+          
+          <div class="col-lg-12">
+            <div class="warpper" style="margin: auto">
+              <p>{{ body|safe }}</p>
+              <hr>
+            </div>
           </div>
+          
+          
           <!-- <a href="#">
             <h4 style="text-align: left;margin-top: 10px;">学习社会主义核心价值观，共筑中国梦</h4>
             <p style="text-align: left;margin-left: 0px;">为增进大学生对社会主义核心价值观的认识，学习核心价值观的相关内容，传递社会主义正能量。</p>
@@ -156,8 +161,8 @@
 
       <!-- FOOTER -->
       <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p class="pull-right"><a href="#">回到顶部</a></p>
+        <p>Copyright ©2012 Wuxi South Ocean College All Rights Reserved. 无锡南洋职业技术学院 版权所有</p>
 
     </div><!-- /.container -->
 

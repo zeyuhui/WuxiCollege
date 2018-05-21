@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>Carousel Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://v3.bootcss.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="http://v3.bootcss.com/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='css/carousel.css')}}" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <div class="container marketing ">
+      <div class="row">
+        <div class="col-lg-12">
+          <img class="img-thumbnail" alt="200x200" style="width: 626px; height: 79px;" src="{{url_for('static',filename='logo.jpg')}}" data-holder-rendered="true">
+          <div class="navbar-wrapper" style="margin-top: 80px;"">
+            <div class="container" >
+
+              <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#" style="width: 100px;text-align: center;">首页</a>
+                  </div>
+                  <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                      <!-- <li><a href="#">Home</a></li>
+                      <li><a href="#about">About</a></li>
+                      <li><a href="#contact">Contact</a></li> -->
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">学院概况 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">简介</a></li>
+                          <li><a href="#">机构设置</a></li>
+                          <li><a href="#">获奖情况</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">专业设置 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">汽车检测与维修技术专业</a></li>
+                          <li><a href="#">汽车制造与装配技术专业</a></li>
+                          <li><a href="#">汽车电子技术专业</a></li>
+                          <li><a href="#">汽车营销与服务专业</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">招生就业 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">招生信息</a></li>
+                          <li><a href="#">就业信息</a></li>
+                          <li><a href="#">现代学徒制</a></li>
+                          <li><a href="#">校企合作</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">本科教学 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">院校介绍</a></li>
+                          <li><a href="#">专业设置</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">学生服务 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">学生组织</a></li>
+                          <li><a href="#">规章制度</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">校友天地 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">优秀毕业生</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container marketing " style="padding-top: 60px;">
+      <div class="row">
+        <div class="col-lg-3" style="padding-bottom: 0px;" id="sidebar">
+          <div class="list-group">
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div>
+        </div>
+
+        <div class="col-lg-9" style="padding-bottom: 0px;">
+          <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#">学院动态</a></li>
+          </ul>
+          <div class="row">
+            
+          </div>
+          <!-- <a href="#">
+            <h4 style="text-align: left;margin-top: 10px;">学习社会主义核心价值观，共筑中国梦</h4>
+            <p style="text-align: left;margin-left: 0px;">为增进大学生对社会主义核心价值观的认识，学习核心价值观的相关内容，传递社会主义正能量。</p>
+          </a> -->
+          <!-- <p style="text-align: left;"><a class="btn btn-primary" href="#" role="button">View details</a></p> -->
+        </div>
+
+      </div>
+
+      <!-- <hr class="featurette-divider" style="margin-top: 20px;margin-bottom: 20px"> -->
+
+      <hr class="featurette-divider" style="margin-top: 20px;margin-bottom: 20px">
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://v3.bootcss.com/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <!-- <script src="../../assets/js/vendor/holder.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

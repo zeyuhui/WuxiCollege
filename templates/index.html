@@ -30,6 +30,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{url_for('static',filename='css/carousel.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/buttons.css')}}">
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -58,7 +59,7 @@
                       <li><a href="#about">About</a></li>
                       <li><a href="#contact">Contact</a></li> -->
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">学院概况 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;padding-left: 50px;padding-right: 50px;">学院概况 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="/detail?t1=1&t2=1&t3=0">简介</a></li>
                           <li><a href="/detail?t1=1&t2=2&t3=0">机构设置</a></li>
@@ -66,7 +67,7 @@
                         </ul>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">专业设置 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;padding-left: 50px;padding-right: 50px;">专业设置 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="/detail?t1=2&t2=1&t3=0">汽车电子技术专业</a></li>
                           <li><a href="/detail?t1=2&t2=2&t3=0">汽车检测与维修技术专业</a></li>
@@ -76,7 +77,7 @@
                         </ul>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">招生就业 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;padding-left: 50px;padding-right: 50px;">招生就业 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="/detail?t1=3&t2=1&t3=0">招生信息</a></li>
                           <li><a href="/detail?t1=3&t2=2&t3=0">就业信息</a></li>
@@ -85,21 +86,21 @@
                         </ul>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">本科教学 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;padding-left: 50px;padding-right: 50px;">本科教学 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="/detail?t1=4&t2=1&t3=0">院校介绍</a></li>
                           <li><a href="/detail?t1=4&t2=2&t3=0">专业设置</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">学生服务 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;padding-left: 50px;padding-right: 50px;">学生服务 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="/detail?t1=5&t2=1&t3=0">学生组织</a></li>
                           <li><a href="/detail?t1=5&t2=2&t3=0">规章制度</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">校友天地 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;padding-left: 50px;padding-right: 50px;">校友天地 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="/detail?t1=6&t2=1&t3=0">优秀毕业生</a></li>
                         </ul>
@@ -196,6 +197,7 @@
         <div class="col-lg-5" style="margin-bottom: 0px;">
           <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active"><a href="#">学院动态</a></li>
+              <li role="presentation" style="float: right;font-style: italic;font-weight: bold;"><a style="color: #7b7b7b" href="/detail?t2=1&t3=0&t1=7">More...</a></li>
           </ul>
           <div class="row">
             <div class="col-lg-4" style="margin-bottom: 10px;">
@@ -203,8 +205,8 @@
             </div>
             <div class="col-lg-8" style="padding-left: 0px;">
               <a href="/detail?t2=1&t3=0&t1=7">
-                <h4 style="text-align: left;margin-top: 10px;">学习社会主义核心价值观，共筑中国梦</h4>
-                <p style="text-align: left;margin-left: 0px;">为增进大学生对社会主义核心价值观的认识，传递社会主义正能量。</p>
+                <h4 style="text-align: left;margin-top: 10px;color: #000000">学习社会主义核心价值观，共筑中国梦</h4>
+                <p style="text-align: left;margin-left: 0px;color: #000000">为增进大学生对社会主义核心价值观的认识，传递社会主义正能量。</p>
               </a>
             </div>
           </div>
@@ -232,24 +234,24 @@
         <div class="col-lg-3" style="margin-bottom: 0px;">
           <div class="list-group">
                 <a href="/detail?t1=2&t2=1&t3=0" class="list-group-item" style="border-width: 0px; padding-bottom: 0px;">
-                  <div class="alert alert-info" role="alert" style="margin-bottom: 0px; text-align:  center;"> 
-                    <strong>汽车检测与维修技术专业</strong>
-                  </div>
+                  <button class="button button-primary button-box button-longshadow-right button-longshadow-expand" style="width: 230px;height: 50px;font-size: 16px;">
+                      <strong>汽车检测与维修技术专业</strong>
+                  </button>
                 </a>
                 <a href="/detail?t1=2&t2=2&t3=0" class="list-group-item" style="border-width: 0px; padding-bottom: 0px;">
-                  <div class="alert alert-info" role="alert" style="margin-bottom: 0px; text-align:  center;">
-                    <strong>汽车制造与装配技术专业</strong>
-                  </div>
+                  <button class="button button-action button-box button-longshadow-right button-longshadow-expand" style="width: 230px;height: 50px;font-size: 16px;">
+                      <strong>汽车制造与装配技术专业</strong>
+                  </button>
                 </a>
                 <a href="/detail?t1=2&t2=3&t3=0" class="list-group-item" style="border-width: 0px; padding-bottom: 0px;">
-                  <div class="alert alert-info" role="alert" style="margin-bottom: 0px; text-align:  center;">
-                    <strong>汽车电子技术专业</strong>
-                  </div>
+                  <button class="button button-highlight button-box button-longshadow-right button-longshadow-expand" style="width: 230px;height: 50px;font-size: 16px;">
+                      <strong>汽车电子技术专业</strong>
+                  </button>
                 </a>
                 <a href="/detail?t1=2&t2=4&t3=0" class="list-group-item" style="border-width: 0px; padding-bottom: 0px;">
-                  <div class="alert alert-info" role="alert" style="margin-bottom: 0px; text-align:  center;">
-                    <strong>汽车营销与服务专业</strong>
-                  </div>
+                  <button class="button button-caution button-box button-longshadow-right button-longshadow-expand" style="width: 230px;height: 50px;font-size: 16px;">
+                      <strong>汽车营销与服务专业</strong>
+                  </button>
                 </a>
           </div>
         </div>
@@ -295,6 +297,7 @@
         <div class="col-lg-4" style="margin-bottom: 0px;">
           <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active"><a href="#">优秀毕业生介绍</a></li>
+              <li role="presentation" style="float: right;font-style: italic;font-weight: bold;"><a style="color: #7b7b7b" href="/detail?t1=6&t2=1&t3=0">More...</a></li>
           </ul>
           <div class="row">
             <div class="col-lg-4" style="margin-bottom: 10px;">
@@ -302,8 +305,8 @@
             </div>
             <div class="col-lg-8" style="padding-left: 0px;">
               <a href="/detail?t1=6&t2=1&t3=0">
-                <h4 style="text-align: left;margin-top: 10px;">李彬（原汽修086班学生）</h4>
-                <p style="text-align: left;margin-left: 0px;">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
+                <h4 style="text-align: left;margin-top: 10px;color: #000000">李彬（原汽修086班学生）</h4>
+                <p style="text-align: left;margin-left: 0px;color: #000000">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
               </a>
             </div>
           </div>
@@ -330,32 +333,115 @@
               <li role="presentation" class="active"><a href="#">校企合作</a></li>
               <li role="presentation"><a href="#" style="color: #555;">企业招聘</a></li>
           </ul>
-          <div class="list-group">
-                <a href="#" class="list-group-item" style="border-width: 0px; padding-bottom: 0px;">
-                  <div class="alert alert-success" role="alert" style="margin-bottom: 0px;padding-top: 10px;padding-bottom: 10px;"> 
-                    <strong>汽车制造厂</strong>
-                  </div>
+          <div class="list-group" style="margin-bottom: 0px;">
+                <a href="#" class="list-group-item" style="border-width: 0px;">
+                  <button class="button button-primary button-pill " style="width: 330px;height: 40px;font-size: 16px;">
+                      <strong>汽车制造厂</strong>
+                  </button>
                 </a>
-                <a href="#" class="list-group-item" style="border-width: 0px; padding-bottom: 0px;">
-                  <div class="alert alert-success" role="alert" style="margin-bottom: 0px;padding-top: 10px;padding-bottom: 10px;">
-                    <strong>行业协会</strong>
-                  </div>
+                <a href="#" class="list-group-item" style="border-width: 0px;">
+                  <button class="button button-action button-pill " style="width: 330px;height: 40px;font-size: 16px;">
+                      <strong>行业协会</strong>
+                  </button>
                 </a>
-                <a href="#" class="list-group-item" style="border-width: 0px; padding-bottom: 0px;">
-                  <div class="alert alert-success" role="alert" style="margin-bottom: 0px;padding-top: 10px;padding-bottom: 10px;">
-                    <strong>国际交流</strong>
-                  </div>
+                <a href="#" class="list-group-item" style="border-width: 0px;">
+                  <button class="button button-highlight button-pill " style="width: 330px;height: 40px;font-size: 16px;">
+                      <strong>国际交流</strong>
+                  </button>
                 </a>
-                <a href="#" class="list-group-item" style="border-width: 0px; padding-bottom: 0px;">
-                  <div class="alert alert-success" role="alert" style="margin-bottom: 0px;padding-top: 10px;padding-bottom: 10px;">
-                    <strong>台湾名企</strong>
-                  </div>
+                <a href="#" class="list-group-item" style="border-width: 0px;">
+                  <button class="button button-caution button-pill " style="width: 330px;height: 40px;font-size: 16px;">
+                      <strong>台湾名企</strong>
+                  </button>
                 </a>
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="container marketing ">
       <div class="row">
+        <div class="col-lg-12">
+          <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#">战略合作单位</a></li>
+          </ul>
+          <div id="myCarousel3" class="carousel slide" data-ride="carousel" style="height: 150px;margin-top: 10px;margin-bottom: 0px">
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel3" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox" style="height: 150px;">
+              <div class="item active" style="background-color: #FFFFFF;">
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    <a href="http://www.audi.cn/">
+                      <img src="{{url_for('static',filename='site1.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    </a>
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    <a href="http://www.bmw.com.cn/">
+                      <img src="{{url_for('static',filename='site2.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    </a>
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    <a href="http://www.mercedes-benz.com.cn/">
+                      <img src="{{url_for('static',filename='site3.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    </a>
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    <a href="http://www.peugeot.com.cn/">
+                      <img src="{{url_for('static',filename='site4.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    </a>
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    
+                </div>
+              </div>
+              <div class="item" style="background-color: #FFFFFF;">
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    <a href="http://www.buick.com.cn/">
+                      <img src="{{url_for('static',filename='site5.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    </a>
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    <a href="http://www.vw.com.cn/">
+                      <img src="{{url_for('static',filename='site6.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    </a>
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    <a href="http://www.toyota.com.cn/">
+                      <img src="{{url_for('static',filename='site7.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    </a>
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    <a href="http://www.jaguar.com.cn/">
+                      <img src="{{url_for('static',filename='site8.jpg')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    </a>
+                </div>
+                <div class="col-xs-2"  style="margin-top: 10px;">
+                    
+                </div>
+              </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel3" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel3" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <div class="row">
         <div class="col-lg-12">
           <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active"><a href="#">战略合作单位</a></li>
@@ -405,10 +491,17 @@
             </div>
           </div>
         </div>
+      </div> -->
+
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-lg-12">
+          <p>
+            <strong>友情链接</strong><strong>：</strong> <a href="http://art.wsoc.edu.cn">建筑工程与艺术设计学院</a>| <a href="http://nee.wsoc.edu.cn/">国际学院</a>| <a href="http://gs.wsoc.edu.cn/" target="_blank">商学院</a>| <a href="http://zs.wsoc.edu.cn/">招生网</a>| <a href="http://it.wsoc.edu.cn/">智能装备与信息工程学院</a>| <a href="http://fs.wsoc.edu.cn/">航空旅游学院</a>| <a href="http://www.wsoc.edu.cn/">无锡南洋学院</a>|
+          </p>
+        </div>
       </div>
 
-
-      <hr class="featurette-divider" style="margin-top: 20px;margin-bottom: 20px">
+      <hr class="featurette-divider" style="margin-top: 0px;margin-bottom: 20px">
 
       <!-- /END THE FEATURETTES -->
 

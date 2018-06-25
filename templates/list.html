@@ -32,13 +32,13 @@
 
     <!-- Custom styles for this template -->
     <link href="{{url_for('static',filename='css/carousel.css')}}" rel="stylesheet">
-    {{ ckeditor.load_code_theme() }}
-
+    <link href="{{url_for('static',filename='css/blog.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/buttons.css')}}">
   </head>
 <!-- NAVBAR
 ================================================== -->
   <body>
-    <div class="container marketing ">
+     <div class="container marketing ">
       <div class="row">
         <div class="col-lg-12">
           <img class="img-thumbnail" alt="200x200" style="width: 626px; height: 79px;" src="{{url_for('static',filename='logo.jpg')}}" data-holder-rendered="true">
@@ -137,12 +137,74 @@
           
           <div class="col-lg-12">
             <div class="warpper" style="margin: auto">
-              <h3 class="mb-0" style="text-align: center;">
-                {{ title }}
-              </h3>
-              <div class="mb-1 text-muted" style="text-align: center;">来源：汽车工程与管理学院 时间：{{ date_time }}</div>
-              <p>{{ body|safe }}</p>
-              <hr>
+              <div class="row mb-1">
+                <div class="col-md-12">
+                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
+                    <div class="card-body d-flex flex-column align-items-start">
+                      <h3 class="mb-0">
+                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
+                      </h3>
+                      <div class="mb-1 text-muted">2018.12.12</div>
+                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-md-12">
+                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
+                    <div class="card-body d-flex flex-column align-items-start">
+                      <h3 class="mb-0">
+                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
+                      </h3>
+                      <div class="mb-1 text-muted">2018.12.12</div>
+                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-md-12">
+                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
+                    <div class="card-body d-flex flex-column align-items-start">
+                      <h3 class="mb-0">
+                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
+                      </h3>
+                      <div class="mb-1 text-muted">2018.12.12</div>
+                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-md-12">
+                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
+                    <div class="card-body d-flex flex-column align-items-start">
+                      <h3 class="mb-0">
+                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
+                      </h3>
+                      <div class="mb-1 text-muted">2018.12.12</div>
+                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-md-12">
+                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
+                    <div class="card-body d-flex flex-column align-items-start">
+                      <h3 class="mb-0">
+                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
+                      </h3>
+                      <div class="mb-1 text-muted">2018.12.12</div>
+                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <a href={{page_pre_url}} class="button button-primary button-pill button-small">往前</a>
+              <a href={{page_post_url}} class="button button-primary button-pill button-small">往后</a>
             </div>
           </div>
           

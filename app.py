@@ -1,4 +1,7 @@
+# -*- coding: UTF-8 -*-
 import os
+import time
+import hashlib
 
 from flask import Flask, render_template, jsonify, request, redirect, url_for, g, send_from_directory
 
@@ -11,9 +14,20 @@ from flask_ckeditor import CKEditor, CKEditorField
 from sqlite3 import dbapi2 as sqlite3
 
 app = Flask(__name__)
+app.config['CKEDITOR_HEIGHT'] = 500
 app.secret_key = 'secret string'
 
 ckeditor = CKEditor(app)
+
+t1_list = [u'学院概况', u'专业设置', u'招生就业', u'本科教学', u'学生服务', u'校友天地']
+
+t2_list = [[u'简介', u'机构设置', u'获奖情况'],
+		[u'汽车电子技术专业', u'汽车检测与维修技术专业', u'汽车营销与服务专业', u'汽车运用与维修技术专业', u'汽车制造与装配技术专业'],
+		[u'招生信息', u'就业信息', u'现代学徒制', u'校企合作'],
+		[u'院校介绍', u'专业设置'],
+		[u'学生组织', u'规章制度'],
+		[u'优秀毕业生']
+		]
 
 class PostForm(FlaskForm):
 	t1 = StringField('t1')
@@ -48,21 +62,35 @@ def index():
 def admin():
     return render_template('admin.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/edit_article', methods=['GET', 'POST'])
+def edit_article():
+	form = PostForm()
+	return render_template('edit.html', form=form)
+
+@app.route('/submit_article', methods=['GET', 'POST'])
+def submit_article():
 	form = PostForm()
 	if form.validate_on_submit():
-		t1 = form.t1.data
-		t2 = form.t2.data
-		t3 = form.t3.data
-		body = form.body.data
+		t1 = request.form.get('select_lv1')
+		t2 = request.form.get('select_lv2')
+		title = request.form.get('title')
+		abstract = request.form.get('abstract')
+		date_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) 
+		print 'select_lv1:' + t1
+		print 'select_lv2:' + t2
+		print 'title:' + title
+		print 'abstract:' + abstract
+		print  date_time
+		body = form.body.data		
+
+		hash_md5 = hashlib.md5(date_time)
+		t3 = hash_md5.hexdigest()
 		# You may need to store the data in database here
 		db = get_db()
-		db.execute('insert into entries (t1, t2, t3, body) values (?, ?, ?, ?)',
-	               [t1, t2, t3, body])
+		db.execute('insert into entries (t1, t2, t3, title, abstract, date_time, body) values (?, ?, ?, ?, ?, ?, ?)',
+	               [t1, t2, t3, title, abstract, date_time, body])
 		db.commit()
 		return redirect(url_for('detail', t1=t1, t2=t2, t3=t3))
-	return render_template('edit.html', form=form)
 
 @app.route('/detail', methods=['GET', 'POST'])
 def detail():
@@ -72,13 +100,37 @@ def detail():
 	t3 = request.args.get('t3')
 	print t1, t2, t3
 	db = get_db()
-	cur = db.execute('select t1, t2, t3, body from entries where t1=? and t2=? and t3=? order by id desc', [t1,t2, t3])
+	cur = db.execute('select title, abstract, date_time, body from entries where t1=? and t2=? and t3=? order by id desc', [t1,t2, t3])
 	entries = cur.fetchall()
 	if (len(entries) != 0):
+		title = entries[0]['title']
+		date_time = entries[0]['date_time']
 		body = entries[0]['body']
-		return render_template('detail.html', body=body)
+		return render_template('detail.html', title=title, date_time=date_time,body=body, t1_string=t1_list[int(t1)-1], t2_list=t2_list[int(t1)-1], t2_string=t2_list[int(t1)-1][int(t2)-1])
 	else:
 		return render_template('detail.html')
+
+@app.route('/list', methods=['GET', 'POST'])
+def list():
+	#print request.args
+	t1 = request.args.get('t1')
+	t2 = request.args.get('t2')
+	page = request.args.get('page')
+	if page:
+		page = int(page)
+	else:
+		page = 1
+	page_pre_url = "/list?t1="+t1 + "&t2=" + t2 + "&page="+ str( (page-1) if page > 1 else page) 
+	page_post_url = "/list?t1="+t1 + "&t2=" + t2 + "&page="+ str(page+1) 
+	# print t1, t2, t3
+	# db = get_db()
+	# cur = db.execute('select t1, t2, t3, body from entries where t1=? and t2=? and t3=? order by id desc', [t1,t2, t3])
+	# entries = cur.fetchall()
+	# if (len(entries) != 0):
+	# 	body = entries[0]['body']
+	# 	return render_template('list.html', body=body)
+	# else:
+	return render_template('list.html', page_pre_url=page_pre_url, page_post_url=page_post_url, t1_string=t1_list[int(t1)-1], t2_list=t2_list[int(t1)-1], t2_string=t2_list[int(t1)-1][int(t2)-1])
 
 app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'
 

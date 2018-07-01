@@ -19,14 +19,41 @@ app.secret_key = 'secret string'
 
 ckeditor = CKEditor(app)
 
-t1_list = [u'学院概况', u'专业设置', u'招生就业', u'本科教学', u'学生服务', u'校友天地']
+t1_list = [u'学院概况', u'专业设置', u'招生就业', u'本科教学', u'学生服务', u'校友天地', u"学院动态"]
 
-t2_list = [[u'简介', u'机构设置', u'获奖情况'],
-		[u'汽车电子技术专业', u'汽车检测与维修技术专业', u'汽车营销与服务专业', u'汽车运用与维修技术专业', u'汽车制造与装配技术专业'],
-		[u'招生信息', u'就业信息', u'现代学徒制', u'校企合作'],
-		[u'院校介绍', u'专业设置'],
-		[u'学生组织', u'规章制度'],
-		[u'优秀毕业生']
+t2_list = [
+		[
+		{'title':u'简介', 'url':"/list?t1=1&t2=1"}, 
+		{'title':u'机构设置', 'url':"/list?t1=1&t2=2"}, 
+		{'title':u'获奖情况', 'url':"/list?t1=1&t2=3"}
+		],
+		[
+		{'title':u'汽车电子技术专业', 'url':"/list?t1=2&t2=1"}, 
+		{'title':u'汽车检测与维修技术专业', 'url':"/list?t1=2&t2=2"}, 
+		{'title':u'汽车营销与服务专业', 'url':"/list?t1=2&t2=3"}, 
+		{'title':u'汽车运用与维修技术专业', 'url':"/list?t1=2&t2=4"}, 
+		{'title':u'汽车制造与装配技术专业', 'url':"/list?t1=2&t2=5"}
+		],
+		[
+		{'title':u'招生信息', 'url':"/list?t1=3&t2=1"}, 
+		{'title':u'就业信息', 'url':"/list?t1=3&t2=2"}, 
+		{'title':u'现代学徒制', 'url':"/list?t1=3&t2=3"}, 
+		{'title':u'校企合作', 'url':"/list?t1=3&t2=4"}
+		],
+		[
+		{'title':u'院校介绍', 'url':"/list?t1=4&t2=1"}, 
+		{'title':u'专业设置', 'url':"/list?t1=4&t2=2"}
+		],
+		[
+		{'title':u'学生组织', 'url':"/list?t1=5&t2=1"}, 
+		{'title':u'规章制度', 'url':"/list?t1=5&t2=2"}
+		],
+		[
+		{'title':u'优秀毕业生', 'url':"/list?t1=6&t2=1"}
+		],
+		[
+		{'title':u'动态简讯', 'url':"/list?t1=7&t2=1"}
+		]
 		]
 
 class PostForm(FlaskForm):
@@ -34,7 +61,10 @@ class PostForm(FlaskForm):
 	t2 = StringField('t2')
 	t3 = StringField('t3')
 	body = CKEditorField('Body', validators=[DataRequired()])
-	submit = SubmitField('Submit')
+	submit = SubmitField(u'提交文章')
+
+class PostFormDashboard(FlaskForm):
+	submit = SubmitField(u'载入条目')
 
 def connect_db():
     """Connects to the specific database."""
@@ -52,15 +82,76 @@ def get_db():
 
 @app.route('/')
 def index():
-	# db = get_db()
-	# cur = db.execute('select t1, t2, t3, body from entries order by id desc')
-	# entries = cur.fetchall()
-	# print entries
-	return render_template('index.html')
+	db = get_db()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['6', '1'])
+	entries = cur.fetchall()
+	detail_6_head = {"title" : u"空标题", "abstract": u"空摘要" , "url":"#"}
+	detail_6_list = [
+		{"title" : u"空标题", "url":"#"},
+		{"title" : u"空标题", "url":"#"},
+		{"title" : u"空标题", "url":"#"},
+		{"title" : u"空标题", "url":"#"}
+		]
+	length = len(entries)
+	if (length > 0):
+		detail_6_head["title"] = entries[0]["title"]
+		detail_6_head["abstract"] = entries[0]["abstract"]
+		detail_6_head["url"] = "/detail?t1=6&t2=1&t3=" + entries[0]["t3"]
+		if length > 1:
+			last = 5 if length >= 5 else length
+			for index in range(1, length):
+				detail_6_list[index-1]["title"] = entries[index]["title"]
+				detail_6_list[index-1]["url"] = "/detail?t1=6&t2=1&t3=" + entries[index]["t3"]
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['7', '1'])
+	entries = cur.fetchall()
+	detail_7_head = {"title" : u"动态空标题", "abstract": u"动态空摘要" , "url":"#"}
+	detail_7_list = [
+		{"title" : u"动态空标题", "url":"#"},
+		{"title" : u"动态空标题", "url":"#"},
+		{"title" : u"动态空标题", "url":"#"},
+		{"title" : u"动态空标题", "url":"#"}
+		]
+	length = len(entries)
+	if (length > 0):
+		detail_7_head["title"] = entries[0]["title"]
+		detail_7_head["abstract"] = entries[0]["abstract"]
+		detail_7_head["url"] = "/detail?t1=7&t2=1&t3=" + entries[0]["t3"]
+		if length > 1:
+			last = 5 if length >= 5 else length
+			for index in range(1, length):
+				detail_7_list[index-1]["title"] = entries[index]["title"]
+				detail_7_list[index-1]["url"] = "/detail?t1=7&t2=1&t3=" + entries[index]["t3"]
+	return render_template('index.html',detail_6_head=detail_6_head, detail_6_list=detail_6_list ,detail_7_head=detail_7_head, detail_7_list=detail_7_list )
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+	return render_template('admin.html')
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+	form = PostFormDashboard()
+	t1 = request.form.get('select_lv1')
+	t2 = request.form.get('select_lv2')
+	if not t1:
+		t1 = 1
+	if not t2:
+		t2 = 1
+	print t1, t2
+	db = get_db()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', [t1,t2])
+	entries = cur.fetchall()
+	return render_template('dashboard.html', form=form, entries=entries, t1_string=t1_list[int(t1)-1], t2_string=t2_list[int(t1)-1][int(t2)-1]['title'])
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+	t3 = request.args.get('t3')
+	if t3:
+		print t3
+		db = get_db()
+		cur = db.execute('delete from entries where t3=?', [t3])
+		db.commit()
+	return redirect(url_for('dashboard'))
+
 
 @app.route('/edit_article', methods=['GET', 'POST'])
 def edit_article():
@@ -106,7 +197,7 @@ def detail():
 		title = entries[0]['title']
 		date_time = entries[0]['date_time']
 		body = entries[0]['body']
-		return render_template('detail.html', title=title, date_time=date_time,body=body, t1_string=t1_list[int(t1)-1], t2_list=t2_list[int(t1)-1], t2_string=t2_list[int(t1)-1][int(t2)-1])
+		return render_template('detail.html', title=title, date_time=date_time,body=body, t1_string=t1_list[int(t1)-1], t2_list=t2_list[int(t1)-1], t2_string=t2_list[int(t1)-1][int(t2)-1]['title'])
 	else:
 		return render_template('detail.html')
 
@@ -123,14 +214,27 @@ def list():
 	page_pre_url = "/list?t1="+t1 + "&t2=" + t2 + "&page="+ str( (page-1) if page > 1 else page) 
 	page_post_url = "/list?t1="+t1 + "&t2=" + t2 + "&page="+ str(page+1) 
 	# print t1, t2, t3
-	# db = get_db()
-	# cur = db.execute('select t1, t2, t3, body from entries where t1=? and t2=? and t3=? order by id desc', [t1,t2, t3])
-	# entries = cur.fetchall()
+	db = get_db()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', [t1,t2])
+	entries = cur.fetchall()
+	length = len(entries)
+	if (length ==1):
+		return redirect(url_for('detail', t1=t1, t2=t2, t3=entries[0]['t3']))
+	detail_list = []
+	if (length > 5*(page-1)):
+		last = 5* page if (length >= 5* page) else length
+		for i in range(5*(page-1), last):
+			detail = {}
+			detail["title"] = entries[i]["title"]
+			detail["abstract"] = entries[i]["abstract"]
+			detail["date_time"] = entries[i]["date_time"]
+			detail["url"] ="/detail?t1="+t1 + "&t2=" + t2 + "&t3=" + entries[i]["t3"]
+			detail_list.append(detail)
 	# if (len(entries) != 0):
 	# 	body = entries[0]['body']
 	# 	return render_template('list.html', body=body)
 	# else:
-	return render_template('list.html', page_pre_url=page_pre_url, page_post_url=page_post_url, t1_string=t1_list[int(t1)-1], t2_list=t2_list[int(t1)-1], t2_string=t2_list[int(t1)-1][int(t2)-1])
+	return render_template('list.html', detail_list=detail_list, page_pre_url=page_pre_url, page_post_url=page_post_url, t1_string=t1_list[int(t1)-1], t2_list=t2_list[int(t1)-1], t2_string=t2_list[int(t1)-1][int(t2)-1]['title'])
 
 app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'
 

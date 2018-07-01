@@ -29,6 +29,7 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/buttons.css')}}">
     {{ ckeditor.load() }}
   </head>
 
@@ -63,19 +64,23 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li ><a href="/dashboard">总览 <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="/edit_article">录入文章</a></li>
+            <li class="active"><a href="/dashboard">总览 <span class="sr-only">(current)</span></a></li>
+            <li><a href="/edit_article">录入文章</a></li>
             <li><a href="#">更换图片</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <div class="warpper">
-            <h2>录入文章</h2>
-            <form method="post" action="/submit_article">
-              {{ form.csrf_token }}
 
-              <h3>一级标题</h3>
-              <select name="select_lv1" class="selectpicker form-control" onchange="lv1(this.options[this.options.selectedIndex].value)">
+          <div class="warpper">
+            <form method="post" action="/dashboard">
+              {{ form.csrf_token }}
+              <div class="col-sm-6">
+                <h3>一级标题</h3>
+              </div>
+              <div class="col-sm-6">
+                <h3>二级标题</h3>
+              </div>
+              <select class="col-sm-3" name="select_lv1" class="selectpicker form-control" onchange="lv1(this.options[this.options.selectedIndex].value)">
                       <option value="1" selected="selected">学院概况</option>
                       <option value="2">专业设置</option>
                       <option value="3">招生就业</option>
@@ -84,73 +89,108 @@
                       <option value="6">校友天地</option>
                       <option value="7">学院动态</option>
                     </select>
-              <h3>二级标题</h3>
-              <select id="lv2" name="select_lv2" class="selectpicker form-control">
+              <div class="col-sm-3">
+                
+              </div>
+              <select class="col-sm-4" id="lv2" name="select_lv2" class="selectpicker form-control">
                 <option value="1" selected="selected">简介</option>
                 <option value="2">机构设置</option>
                 <option value="3">获奖情况</option>
               </select>
-              <h3>文章标题</h3>
-              <input id="title" name="title" type="text" value="" class="col-sm-6"><br>
-              <h3>简介</h3>
-              <input id="abstract" name="abstract" type="text" value="" class="col-sm-12"><br><br>
-              {{ form.body }}
-              <br>
+              <br><br><br><br><br>
               {{ form.submit }}
+              <br><br>
             </form>
           </div>
-          {{ ckeditor.config(name='body') }}
-            <script type="text/javascript">
+          <h3>{{t1_string}}  <span style="padding-left: 10px;font-size: 20px;">{{t2_string}}</span></h3>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>标题</th>
+                  <th>时间</th>
+                  <th>操作</th>
+                  <!-- <th>Header</th>
+                  <th>Header</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                {% for entry in entries%}
+                <tr>
+                  <td>{{entry.title}}</td>
+                  <td>{{entry.date_time}}</td>
+                  <td>
+                    <button id="{{entry.t3}}" class="button button-tiny button-caution button-pill " onclick="deleteEntry(id)">
+                      <strong>删除</strong>
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
               function lv1(s)
               {
                   var x= document.getElementById("lv2")
                   // console.log(s)
                   // console.log(x)
                   if (s == 1){
-                  document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">简介</option>'
-                  +'<option value="2">机构设置</option>'
-                  +'<option value="3">获奖情况</option>'
-                  ;
-                }
+                    document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">简介</option>'
+                    +'<option value="2">机构设置</option>'
+                    +'<option value="3">获奖情况</option>'
+                    ;
+                  }
                   else if (s == 2){
-                  document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">汽车电子技术专业</option>'
-                  +'<option value="2">汽车检测与维修技术专业</option>'
-                  +'<option value="3">汽车营销与服务专业</option>'
-                  +'<option value="4">汽车运用与维修技术专业</option>'
-                  +'<option value="5">汽车制造与装配技术专业</option>'
-                  ;
+                    document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">汽车电子技术专业</option>'
+                    +'<option value="2">汽车检测与维修技术专业</option>'
+                    +'<option value="3">汽车营销与服务专业</option>'
+                    +'<option value="4">汽车运用与维修技术专业</option>'
+                    +'<option value="5">汽车制造与装配技术专业</option>'
+                    ;
+                  }
+                  else if (s == 3){
+                    document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">招生信息</option>'
+                    +'<option value="2">就业信息</option>'
+                    +'<option value="3">现代学徒制</option>'
+                    +'<option value="4">校企合作</option>'
+                    ;
+                  }
+                  else if (s == 4){
+                    document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">院校介绍</option>'
+                    +'<option value="2">专业设置</option>'
+                    ;
+                  }
+                  else if (s == 5){
+                    document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">学生组织</option>'
+                    +'<option value="2">规章制度</option>'
+                    ;
+                  }
+                  else if (s == 6){
+                    document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">优秀毕业生</option>'
+                    ;
+                  }
+                  else if (s == 7){
+                    document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">动态简讯</option>'
+                    ;
+                  }
+              }
+              function deleteEntry(t3) {
+                // body...
+                if (confirm("你确定删除吗？")) {
+                    // alert("点击了确定");
+                    window.location.href="/delete?t3="+t3
                 }
-                else if (s == 3){
-                  document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">招生信息</option>'
-                  +'<option value="2">就业信息</option>'
-                  +'<option value="3">现代学徒制</option>'
-                  +'<option value="4">校企合作</option>'
-                  ;
+                else {
+                    // alert("点击了取消");
                 }
-                else if (s == 4){
-                  document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">院校介绍</option>'
-                  +'<option value="2">专业设置</option>'
-                  ;
-                }
-                else if (s == 5){
-                  document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">学生组织</option>'
-                  +'<option value="2">规章制度</option>'
-                  ;
-                }
-                else if (s == 6){
-                  document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">优秀毕业生</option>'
-                  ;
-                }
-                else if (s == 7){
-                  document.getElementById("lv2").innerHTML = '<option value="1" selected="selected">动态简讯</option>'
-                  ;
-                }
+
               }
             </script>
-        </div>
-      </div>
-    </div>
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

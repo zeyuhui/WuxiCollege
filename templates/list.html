@@ -124,8 +124,8 @@
         <div class="col-lg-3" style="padding-bottom: 0px;" id="sidebar">
           <div class="list-group">
             <a href="#" class="list-group-item">{{t1_string}}</a>
-            {% for one_t2_string in t2_list%}
-              <a href="" class="list-group-item">  &nbsp;&nbsp;&nbsp;&nbsp;{{one_t2_string}}</a>
+            {% for one_t2 in t2_list%}
+              <a href="{{one_t2.url}}" class="list-group-item">  &nbsp;&nbsp;&nbsp;&nbsp;{{one_t2.title}}</a>
             {% endfor %}
           </div>
         </div>
@@ -137,71 +137,21 @@
           
           <div class="col-lg-12">
             <div class="warpper" style="margin: auto">
+              {% for item in detail_list %}
               <div class="row mb-1">
                 <div class="col-md-12">
                   <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
                     <div class="card-body d-flex flex-column align-items-start">
                       <h3 class="mb-0">
-                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
+                        <a class="text-dark" href="{{item.url}}">{{item.title}}</a>
                       </h3>
-                      <div class="mb-1 text-muted">2018.12.12</div>
-                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
+                      <div class="mb-1 text-muted">{{item.date_time}}</div>
+                      <p class="card-text mb-auto">{{item.abstract}}</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row mb-1">
-                <div class="col-md-12">
-                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
-                    <div class="card-body d-flex flex-column align-items-start">
-                      <h3 class="mb-0">
-                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
-                      </h3>
-                      <div class="mb-1 text-muted">2018.12.12</div>
-                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-1">
-                <div class="col-md-12">
-                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
-                    <div class="card-body d-flex flex-column align-items-start">
-                      <h3 class="mb-0">
-                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
-                      </h3>
-                      <div class="mb-1 text-muted">2018.12.12</div>
-                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-1">
-                <div class="col-md-12">
-                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
-                    <div class="card-body d-flex flex-column align-items-start">
-                      <h3 class="mb-0">
-                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
-                      </h3>
-                      <div class="mb-1 text-muted">2018.12.12</div>
-                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-1">
-                <div class="col-md-12">
-                  <div class="card flex-md-row mb-4 box-shadow h-md-250" style="height: 100px">
-                    <div class="card-body d-flex flex-column align-items-start">
-                      <h3 class="mb-0">
-                        <a class="text-dark" href="#">李彬（原汽修086班学生）</a>
-                      </h3>
-                      <div class="mb-1 text-muted">2018.12.12</div>
-                      <p class="card-text mb-auto">单位：泰州市海通汽车销售服务有限公司  职务：试乘试驾兼大客户经理</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
               <br>
               <a href={{page_pre_url}} class="button button-primary button-pill button-small">往前</a>
               <a href={{page_post_url}} class="button button-primary button-pill button-small">往后</a>

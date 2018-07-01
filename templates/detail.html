@@ -124,8 +124,8 @@
         <div class="col-lg-3" style="padding-bottom: 0px;" id="sidebar">
           <div class="list-group">
             <a href="#" class="list-group-item">{{t1_string}}</a>
-            {% for one_t2_string in t2_list%}
-              <a href="" class="list-group-item">  &nbsp;&nbsp;&nbsp;&nbsp;{{one_t2_string}}</a>
+            {% for one_t2 in t2_list%}
+              <a href="{{one_t2.url}}" class="list-group-item">  &nbsp;&nbsp;&nbsp;&nbsp;{{one_t2.title}}</a>
             {% endfor %}
           </div>
         </div>

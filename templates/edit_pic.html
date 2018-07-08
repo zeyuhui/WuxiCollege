@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{url_for('static',filename='favicon.ico')}}">
+
+    <title>汽车工程与管理学院--无锡南洋职业技术学</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://v3.bootcss.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='css/dashboard.css')}}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="http://v3.bootcss.com/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">管理后台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <!-- <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form> -->
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li ><a href="/dashboard">总览 <span class="sr-only">(current)</span></a></li>
+            <li ><a href="/edit_article">录入文章</a></li>
+            <li class="active"><a href="/edit_pic">更换图片</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="warpper">
+            <h2>主展示图片</h2>
+            <form method=post enctype=multipart/form-data action="/upload_pic" style="padding-top: 20px; padding-bottom: 20px">
+              
+              <input type=submit value="上传图片">
+              <input type=file name="a_file" style="display: inline; padding-left: 20px;" required="required">   
+              建议像素比 1000*370 或 2000*740
+            </form>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>预览</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for entry in a_entries%}
+                  <tr>
+                    <td class="col-sm-6">
+                      <div >
+                        <img class="col-sm-12" src="{{url_for('static',filename=entry.body)}}">
+                      </div>
+                    </td>
+                    <td><div class="col-sm-6">{{entry.date_time}}</div></td>
+                    <td>
+                      <button id="{{entry.t3}}" class="button button-tiny button-caution button-pill " onclick="deleteEntry(id)">
+                        <strong>删除</strong>
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <h2>学院动态首页显示</h2>
+            {% if e_entry %}
+            <div>
+              <img class="col-sm-6" src="{{url_for('static',filename=e_entry.body)}}">
+            </div>
+            <button id="{{e_entry.t3}}" class="button button-tiny button-caution button-pill " onclick="deleteEntry(id)">
+              <strong>删除</strong>
+            </button>
+            {% else %}
+            <form method=post enctype=multipart/form-data action="/upload_pic" style="padding-top: 20px; padding-bottom: 20px">
+              
+              <input type=submit value="上传图片">
+              <input type=file name="e_file" style="display: inline; padding-left: 20px;" required="required">   
+              建议像素比 200:100
+            </form>
+            {% endif %}
+          </div>
+          <div class="row">
+            <h2>优秀学生首页显示</h2>
+            {% if f_entry %}
+            <div>
+              <img class="col-sm-6" src="{{url_for('static',filename=f_entry.body)}}">
+            </div>
+            <button id="{{f_entry.t3}}" class="button button-tiny button-caution button-pill " onclick="deleteEntry(id)">
+              <strong>删除</strong>
+            </button>
+            {% else %}
+            <form method=post enctype=multipart/form-data action="/upload_pic" style="padding-top: 20px; padding-bottom: 20px">
+              
+              <input type=submit value="上传图片">
+              <input type=file name="f_file" style="display: inline; padding-left: 20px;" required="required">   
+              建议像素比 100:100
+            </form>
+            {% endif %}
+          </div>
+          <div class="warpper">
+            <h2>新闻图片</h2>
+            <form method=post enctype=multipart/form-data action="/upload_pic" style="padding-top: 20px; padding-bottom: 20px">
+              
+              <input type=submit value="上传图片">
+              <input type=file name="b_file" style="display: inline; padding-left: 20px;" required="required">   
+              建议像素比 360:200
+            </form>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>预览</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for entry in b_entries%}
+                  <tr>
+                    <td class="col-sm-6">
+                      <div >
+                        <img class="col-sm-12" src="{{url_for('static',filename=entry.body)}}">
+                      </div>
+                    </td>
+                    <td><div class="col-sm-6">{{entry.date_time}}</div></td>
+                    <td>
+                      <button id="{{entry.t3}}" class="button button-tiny button-caution button-pill " onclick="deleteEntry(id)">
+                        <strong>删除</strong>
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="warpper">
+            <h2>校园风光</h2>
+            <form method=post enctype=multipart/form-data action="/upload_pic" style="padding-top: 20px; padding-bottom: 20px">
+              
+              <input type=submit value="上传图片">
+              <input type=file name="c_file" style="display: inline; padding-left: 20px;" required="required">   
+              建议像素比 360:200
+            </form>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>预览</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for entry in c_entries%}
+                  <tr>
+                    <td class="col-sm-6">
+                      <div >
+                        <img class="col-sm-12" src="{{url_for('static',filename=entry.body)}}">
+                      </div>
+                    </td>
+                    <td><div class="col-sm-6">{{entry.date_time}}</div></td>
+                    <td>
+                      <button id="{{entry.t3}}" class="button button-tiny button-caution button-pill " onclick="deleteEntry(id)">
+                        <strong>删除</strong>
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="warpper">
+            <h2>战略合作单位</h2>
+            <form method=post enctype=multipart/form-data action="/upload_pic" style="padding-top: 20px; padding-bottom: 20px">
+              
+              <input type=submit value="上传">
+              <input type=text name="d_title" required="required" placeholder="链接地址" style="display: inline; margin-left: 20px;">
+              <input type=file name="d_file" style="display: inline; padding-left: 20px;" required="required">   
+              建议像素比 200:200  
+            </form>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>预览</th>
+                    <th>链接</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for entry in d_entries%}
+                  <tr>
+                    <td class="col-sm-6">
+                      <div >
+                        <img class="col-sm-12" src="{{url_for('static',filename=entry.body)}}">
+                      </div>
+                    </td>
+                    <td><div class="col-sm-6">{{entry.title}}</div></td>
+                    <td>
+                      <button id="{{entry.t3}}" class="button button-tiny button-caution button-pill " onclick="deleteEntry(id)">
+                        <strong>删除</strong>
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function deleteEntry(t3) {
+                // body...
+                if (confirm("你确定删除吗？")) {
+                    // alert("点击了确定");
+                    window.location.href="/delete_pic?t3="+t3
+                }
+                else {
+                    // alert("点击了取消");
+                }
+
+              }
+    </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://v3.bootcss.com/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="http://v3.bootcss.com/assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

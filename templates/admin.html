@@ -36,17 +36,17 @@
 
     <div class="container">
 
-      <form class="form-signin" action="/login">
+      <form class="form-signin" action="/admin" method="post">
         <h2 class="form-signin-heading">后台登陆</h2>
         <label for="inputEmail" class="sr-only">用户名</label>
-        <input type="text" id="inputName" class="form-control" placeholder="用户名" required autofocus>
+        <input type="text" id="inputName" name="inputName" class="form-control" placeholder="用户名" required autofocus>
         <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="密码" required>
-        <div class="checkbox">
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="密码" required>
+        <!-- <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> 记住我
           </label>
-        </div>
+        </div> -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
       </form>
 

@@ -4,6 +4,7 @@ import time
 import hashlib
 
 from flask import Flask, render_template, jsonify, request, redirect, url_for, g, send_from_directory
+from flask_login import LoginManager, login_required, login_user, UserMixin
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -18,6 +19,11 @@ app.config['CKEDITOR_HEIGHT'] = 500
 app.secret_key = 'secret string'
 
 ckeditor = CKEditor(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+users = {'admin': {'password': 'admin'}}
 
 t1_list = [u'学院概况', u'专业设置', u'招生就业', u'本科教学', u'学生服务', u'校友天地', u"学院动态"]
 
@@ -66,6 +72,9 @@ class PostForm(FlaskForm):
 class PostFormDashboard(FlaskForm):
 	submit = SubmitField(u'载入条目')
 
+class User(UserMixin):
+    pass
+
 def connect_db():
     """Connects to the specific database."""
     rv = sqlite3.connect(os.path.join(app.root_path, 'data.db'))
@@ -79,6 +88,30 @@ def get_db():
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = connect_db()
     return g.sqlite_db
+
+@login_manager.user_loader
+def user_loader(name):
+    if name not in users:
+        return
+
+    user = User()
+    user.id = name
+    return user
+
+@login_manager.request_loader
+def request_loader(request):
+    name = request.form.get('inputName')
+    if name not in users:
+        return
+
+    user = User()
+    user.id = name
+    user.is_authenticated = request.form['inputPassword'] == users[name]['password']
+    return user
+
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    return render_template('admin.html')
 
 @app.route('/')
 def index():
@@ -99,7 +132,7 @@ def index():
 		detail_6_head["url"] = "/detail?t1=6&t2=1&t3=" + entries[0]["t3"]
 		if length > 1:
 			last = 5 if length >= 5 else length
-			for index in range(1, length):
+			for index in range(1, last):
 				detail_6_list[index-1]["title"] = entries[index]["title"]
 				detail_6_list[index-1]["url"] = "/detail?t1=6&t2=1&t3=" + entries[index]["t3"]
 	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['7', '1'])
@@ -118,16 +151,100 @@ def index():
 		detail_7_head["url"] = "/detail?t1=7&t2=1&t3=" + entries[0]["t3"]
 		if length > 1:
 			last = 5 if length >= 5 else length
-			for index in range(1, length):
+			for index in range(1, last):
 				detail_7_list[index-1]["title"] = entries[index]["title"]
 				detail_7_list[index-1]["url"] = "/detail?t1=7&t2=1&t3=" + entries[index]["t3"]
-	return render_template('index.html',detail_6_head=detail_6_head, detail_6_list=detail_6_list ,detail_7_head=detail_7_head, detail_7_list=detail_7_list )
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['101', '101'])
+	entries = cur.fetchall()
+	a_entry = None
+	a_entries = []
+	length = len(entries)
+	if (length > 0):
+		a_entry = entries[0]
+		if length > 1:
+			for index in range(1, length):
+				new_entry = {}
+				new_entry["index"] = index
+				new_entry["body"] = entries[index]["body"]
+				a_entries.append(new_entry)
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['102', '102'])
+	entries = cur.fetchall()
+	b_entry = None
+	b_entries = []
+	length = len(entries)
+	if (length > 0):
+		b_entry = entries[0]
+		if length > 1:
+			for index in range(1, length):
+				new_entry = {}
+				new_entry["index"] = index
+				new_entry["body"] = entries[index]["body"]
+				b_entries.append(new_entry)
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['103', '103'])
+	entries = cur.fetchall()
+	c_entry = None
+	c_entries = []
+	length = len(entries)
+	if (length > 0):
+		c_entry = entries[0]
+		if length > 1:
+			for index in range(1, length):
+				new_entry = {}
+				new_entry["index"] = index
+				new_entry["body"] = entries[index]["body"]
+				c_entries.append(new_entry)
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['104', '104'])
+	entries = cur.fetchall()
+	d_entry = []
+	d_entries = []
+	length = len(entries)
+	if (length > 0):
+		if (length > 4):
+			for index in range(0, 4):
+				d_entry.append(entries[index])
+			one_entry = {}
+			for index in range(4, length):
+				if (index % 4 == 0):
+					one_entry = {}
+					one_entry["index"] = index
+					one_entry["list"] = []
+					one_entry["list"].append(entries[index])
+					d_entries.append(one_entry)
+				else:
+					one_entry["list"].append(entries[index])
+		else:
+			for index in range(0, length):
+				d_entry.append(entries[index])
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['105', '105'])
+	e_entry = cur.fetchone()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['106', '106'])
+	f_entry = cur.fetchone()
+	return render_template('index.html',detail_6_head=detail_6_head, detail_6_list=detail_6_list 
+		,detail_7_head=detail_7_head, detail_7_list=detail_7_list 
+		,a_entry=a_entry, a_entries= a_entries
+		,b_entry=b_entry, b_entries= b_entries
+		,c_entry=c_entry, c_entries= c_entries
+		,d_entry=d_entry, d_entries= d_entries
+		,e_entry=e_entry, f_entry= f_entry )
 
-@app.route('/admin')
+@app.route('/admin' , methods=['GET', 'POST'])
 def admin():
+	if request.method == 'POST':
+		print 'POST'
+		name = request.form.get('inputName')
+		password = request.form.get('inputPassword')
+		print name, password
+		if name == 'admin' and password == 'admin':
+			user = User()
+			user.id = name
+			login_user(user)
+			return redirect(url_for("dashboard"))
+	elif request.method == 'GET':
+		return render_template('admin.html')
 	return render_template('admin.html')
 
 @app.route('/dashboard', methods=['GET', 'POST'])
+@login_required
 def dashboard():
 	form = PostFormDashboard()
 	t1 = request.form.get('select_lv1')
@@ -152,11 +269,42 @@ def delete():
 		db.commit()
 	return redirect(url_for('dashboard'))
 
+@app.route('/delete_pic', methods=['GET', 'POST'])
+def delete_pic():
+	t3 = request.args.get('t3')
+	if t3:
+		print t3
+		db = get_db()
+		cur = db.execute('delete from entries where t3=?', [t3])
+		db.commit()
+	return redirect(url_for('edit_pic'))
+
 
 @app.route('/edit_article', methods=['GET', 'POST'])
+@login_required
 def edit_article():
 	form = PostForm()
 	return render_template('edit.html', form=form)
+
+@app.route('/edit_pic', methods=['GET', 'POST'])
+@login_required
+def edit_pic():
+	db = get_db()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['101', '101'])
+	a_entries = cur.fetchall()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['102', '102'])
+	b_entries = cur.fetchall()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['103', '103'])
+	c_entries = cur.fetchall()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['104', '104'])
+	d_entries = cur.fetchall()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['105', '105'])
+	e_entry = cur.fetchone()
+	cur = db.execute('select * from entries where t1=? and t2=? order by id desc', ['106', '106'])
+	f_entry = cur.fetchone()
+	return render_template('edit_pic.html', a_entries = a_entries
+		, b_entries = b_entries, c_entries = c_entries, d_entries = d_entries
+		, e_entry = e_entry, f_entry = f_entry)
 
 @app.route('/submit_article', methods=['GET', 'POST'])
 def submit_article():
@@ -250,6 +398,65 @@ def upload():
     f.save(os.path.join('static/', f.filename))
     url = url_for('files', filename=f.filename)
     return url
+
+@app.route('/upload_pic', methods=['POST'])
+def upload_pic():
+	title = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+	abstract = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+	date_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+	hash_md5 = hashlib.md5(date_time)
+	t3 = hash_md5.hexdigest()
+	if request.files.get('a_file'):
+		f = request.files.get('a_file')
+		f.save(os.path.join('static/', f.filename))
+		body = f.filename			
+		db = get_db()
+		db.execute('insert into entries (t1, t2, t3, title, abstract, date_time, body) values (?, ?, ?, ?, ?, ?, ?)',
+	               [101, 101, t3, title, abstract, date_time, body])
+		db.commit()
+	elif request.files.get('b_file'):
+		f = request.files.get('b_file')
+		f.save(os.path.join('static/', f.filename))
+		body = f.filename			
+		db = get_db()
+		db.execute('insert into entries (t1, t2, t3, title, abstract, date_time, body) values (?, ?, ?, ?, ?, ?, ?)',
+	               [102, 102, t3, title, abstract, date_time, body])
+		db.commit()
+	elif request.files.get('c_file'):
+		f = request.files.get('c_file')
+		f.save(os.path.join('static/', f.filename))
+		body = f.filename			
+		db = get_db()
+		db.execute('insert into entries (t1, t2, t3, title, abstract, date_time, body) values (?, ?, ?, ?, ?, ?, ?)',
+	               [103, 103, t3, title, abstract, date_time, body])
+		db.commit()
+	elif request.files.get('d_file'):
+		f = request.files.get('d_file')
+		title = request.form.get('d_title')
+		f.save(os.path.join('static/', f.filename))
+		body = f.filename			
+		db = get_db()
+		db.execute('insert into entries (t1, t2, t3, title, abstract, date_time, body) values (?, ?, ?, ?, ?, ?, ?)',
+	               [104, 104, t3, title, abstract, date_time, body])
+		db.commit()
+	elif request.files.get('e_file'):
+		f = request.files.get('e_file')
+		f.save(os.path.join('static/', f.filename))
+		body = f.filename			
+		db = get_db()
+		db.execute('insert into entries (t1, t2, t3, title, abstract, date_time, body) values (?, ?, ?, ?, ?, ?, ?)',
+	               [105, 105, t3, title, abstract, date_time, body])
+		db.commit()
+	elif request.files.get('f_file'):
+		f = request.files.get('f_file')
+		f.save(os.path.join('static/', f.filename))
+		body = f.filename			
+		db = get_db()
+		db.execute('insert into entries (t1, t2, t3, title, abstract, date_time, body) values (?, ?, ?, ?, ?, ?, ?)',
+	               [106, 106, t3, title, abstract, date_time, body])
+		db.commit()
+	return redirect(url_for('edit_pic'))
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
